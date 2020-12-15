@@ -1,5 +1,9 @@
 @import '../../node_modules/normalize.scss/normalize';
 @import "variables";
+@import '~ngx-toastr/toastr';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
 html, body {
   height: 100%;

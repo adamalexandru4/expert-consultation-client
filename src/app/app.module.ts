@@ -17,6 +17,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { AuthenticatedHttpInterceptor } from '@app/authentication/authenticated-http.interceptor';
 import { AuthenticationService } from '@app/core';
 import { HeaderInterceptor } from './shared/interceptors/header.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 export const metaReducers: any[] = !environment.production ? [storeFreeze] : [];
 
@@ -52,6 +53,12 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AppRoutingModule,
     StoreModule.forRoot([], { metaReducers }),
     EffectsModule.forRoot([]),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-left',
+      preventDuplicates: true,
+      progressAnimation: 'decreasing'
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
