@@ -71,7 +71,7 @@
 
 .input-group-alternative {
     box-shadow: $input-alternative-box-shadow;
-    border: 0;
+    border: 0px;
     transition: box-shadow .15s ease;
 
     .form-control,
@@ -85,6 +85,10 @@
 	.input-group-alternative {
         box-shadow: $input-focus-alternative-box-shadow !important;
     }
+}
+
+.input-group-invalid {
+	box-shadow: $input-alternative-box-shadow-invalid !important;
 }
 
 

@@ -3,44 +3,59 @@
     <label class="col-md-2 col-form-label form-control-label" for="documentTitle">
       {{ 'document.add.title' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
-      <input class="form-control" formControlName="documentTitle" id="documentTitle" name="documentTitle" type="text"/>
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClassRequired(documentForm.controls.documentTitle)">
+      <input class="form-control" formControlName="documentTitle" id="documentTitle" name="documentTitle" type="text" />
+    </div>
+    <div *ngIf="isValidClassRequired(documentForm.controls.documentTitle)" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label form-control-label" for="documentNumber">
       {{ 'document.add.number' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
-      <input class="form-control" formControlName="documentNumber" id="documentNumber" name="documentNumber"/>
+    <div class="col-md-10 input-group input-group-alternative"
+      [ngClass]="[isValidClassRequired(documentForm.controls.documentNumber), isValidClassNumber(documentForm.controls.documentNumber)]">
+          <input class="form-control" formControlName="documentNumber" id="documentNumber" name="documentNumber" type="number" min="1" />
+    </div>
+    <div *ngIf="isValidClassRequired(documentForm.controls.documentNumber)" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
+    </div>
+    <div *ngIf="isValidClassNumber(documentForm.controls.documentNumber)" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'validation.numberFormatInvalid' | translate }}</p>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label form-control-label" for="documentInitializer">
       {{ 'document.add.initiator' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
-      <input class="form-control" formControlName="documentInitializer" id="documentInitializer"
-             name="documentInitializer"/>
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClassRequired(documentForm.controls.documentInitializer)">
+      <input class="form-control" formControlName="documentInitializer" id="documentInitializer" name="documentInitializer" />
+    </div>
+    <div *ngIf="isValidClassRequired(documentForm.controls.documentInitializer)" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label form-control-label" for="documentType">
       {{ 'document.add.type.name' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClassRequired(documentForm.controls.documentType)">
       <select class="form-control" formControlName="documentType" id="documentType" name="documentType">
         <option *ngFor="let type of documentTypeKeys()" [value]="type">
           {{ 'document.add.type.' + type | translate }}
         </option>
       </select>
     </div>
+    <div *ngIf="isValidClassRequired(documentForm.controls.documentType)" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
+    </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label form-control-label" for="dateOfDevelopment">
       {{ 'document.add.release' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClassRequired(documentForm.controls.dateOfDevelopment)">
       <input [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-default' }"
              bsDatepicker
              class="form-control"
@@ -54,12 +69,15 @@
           </span>
       </div>
     </div>
+    <div *ngIf="isValidClassRequired(documentForm.controls.dateOfDevelopment)" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
+    </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label form-control-label" for="dateOfReceipt">
       {{ 'document.add.receiving' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClassRequired(documentForm.controls.dateOfReceipt)">
       <input [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-default' }"
              bsDatepicker
              class="form-control"
@@ -73,16 +91,20 @@
           </span>
       </div>
     </div>
+    <div *ngIf="isValidClassRequired(documentForm.controls.dateOfReceipt)" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
+    </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label form-control-label">{{ 'document.add.file' | translate }}</label>
-    <div class="col-md-10 custom-file">
+    <div class="col-md-8 custom-file">
       <ec-file-uploader [url]="url"></ec-file-uploader>
     </div>
   </div>
   <div class="row justify-content-end">
-    <button (click)="onSave()" class="btn btn-success mt-4" type="button">
+    <a [routerLink]="" role="button" (click)="onSave()" class="btn btn-success mt-4" type="button"
+      [ngClass]="!documentForm.valid ? 'disabled': ''">
       {{ 'button.save' | translate }}
-    </button>
+    </a>
   </div>
 </form>
