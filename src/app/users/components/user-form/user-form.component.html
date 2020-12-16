@@ -3,8 +3,11 @@
     <label class="col-md-2 col-form-label form-control-label" for="lastName">
       {{ 'users.table.column.lastName' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative input-group input-group-alternative">
-      <input class="form-control" formControlName="lastName" id="lastName" name="lastName" type="text"/>
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClass(userForm.controls.lastName)">
+      <input class="form-control" formControlName="lastName" id="lastName" name="lastName" type="text" maxlength="40"/>
+    </div>
+    <div *ngIf="userForm.controls.lastName.hasError('required') && userForm.controls.lastName.touched" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>
 
@@ -12,8 +15,11 @@
     <label class="col-md-2 col-form-label form-control-label" for="firstName">
       {{ 'users.table.column.firstName' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
-      <input class="form-control" formControlName="firstName" id="firstName" name="firstName" type="text"/>
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClass(userForm.controls.firstName)">
+      <input class="form-control" formControlName="firstName" id="firstName" name="firstName" type="text" maxlength="40"/>
+    </div>
+    <div *ngIf="userForm.controls.firstName.hasError('required') && userForm.controls.firstName.touched" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>
 
@@ -21,8 +27,14 @@
     <label class="col-md-2 col-form-label form-control-label" for="email">
       {{ 'users.table.column.email' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="[isValidClass(userForm.controls.email)]">
       <input class="form-control" formControlName="email" id="email" name="email" type="email"/>
+    </div>
+    <div *ngIf="userForm.controls.email.hasError('required') && userForm.controls.email.touched" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
+    </div>
+    <div *ngIf="userForm.controls.email.hasError('email') && userForm.controls.email.touched" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'validation.form.emailFormatInvalid' | translate }}</p>
     </div>
   </div>
 
@@ -30,8 +42,14 @@
     <label class="col-md-2 col-form-label form-control-label" for="phoneNumber">
       {{ 'users.table.column.phoneNumber' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
-      <input class="form-control" formControlName="phoneNumber" id="phoneNumber" name="phoneNumber" type="text"/>
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="[isValidClass(userForm.controls.phoneNumber)]">
+      <input class="form-control" formControlName="phoneNumber" id="phoneNumber" name="phoneNumber" type="text" maxlength="12"/>
+    </div>
+    <div *ngIf="userForm.controls.phoneNumber.hasError('required') && userForm.controls.phoneNumber.touched" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
+    </div>
+    <div *ngIf="userForm.controls.phoneNumber.hasError('pattern') && userForm.controls.phoneNumber.touched" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'validation.form.phoneNumberInvalid' | translate }}</p>
     </div>
   </div>
 
@@ -39,8 +57,11 @@
     <label class="col-md-2 col-form-label form-control-label" for="district">
       {{ 'users.table.column.district' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
-      <input class="form-control" formControlName="district" id="district" name="district" type="text"/>
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="[isValidClass(userForm.controls.district)]">
+      <input class="form-control" formControlName="district" id="district" name="district" type="text" maxlength="40"/>
+    </div>
+    <div *ngIf="userForm.controls.district.hasError('required') && userForm.controls.district.touched" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>
 
@@ -48,8 +69,11 @@
     <label class="col-md-2 col-form-label form-control-label" for="organisation">
       {{ 'users.table.column.organisation' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative">
-      <input class="form-control" formControlName="organisation" id="organisation" name="organisation" type="text"/>
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="[isValidClass(userForm.controls.organisation)]">
+      <input class="form-control" formControlName="organisation" id="organisation" name="organisation" type="text" maxlength="40"/>
+    </div>
+    <div *ngIf="userForm.controls.organisation.hasError('required') && userForm.controls.organisation.touched" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>
 
@@ -70,8 +94,9 @@
     <button (click)="onCancel()" class="btn btn-secondary mt-4" type="button">
       {{"button.cancel" | translate}}
     </button>
-    <button (click)="onSave()" class="btn btn-success mt-4" type="button">
+    <a [routerLink]="" (click)="onSave()" class="btn btn-success mt-4" type="button"
+      [ngClass]="!userForm.valid ? 'disabled' : ''">
       {{ 'button.save' | translate }}
-    </button>
+    </a>
   </div>
 </form>

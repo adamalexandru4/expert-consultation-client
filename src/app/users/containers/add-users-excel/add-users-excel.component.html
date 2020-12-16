@@ -10,9 +10,10 @@
       <button (click)="onCancel()" class="btn btn-secondary mt-4" type="button">
         {{"button.cancel" | translate}}
       </button>
-      <button (click)="onSave()" class="btn btn-success mt-4" type="button">
+      <a [routerLink]="" (click)="onSave()" class="btn btn-success mt-4" type="button"
+        [ngClass]="isContentFilled() ? '' : 'disabled'">
         {{ 'button.save' | translate }}
-      </button>
+      </a>
     </div>
   </div>
 </div>

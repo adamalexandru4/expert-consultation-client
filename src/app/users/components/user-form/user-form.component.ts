@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '@app/core';
 import { Error } from '@app/core/models/error.model';
 
@@ -24,7 +24,7 @@ export class UserFormComponent implements OnInit, OnChanges {
     lastName: new FormControl('', [Validators.required, Validators.max(40)]),
     firstName: new FormControl('', [Validators.required, Validators.max(40)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    phoneNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
+    phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^((\\+4)|0)?[0-9]{10}$')]),
     district: new FormControl('', [Validators.required, Validators.max(40)]),
     organisation: new FormControl('', [Validators.required, Validators.max(40)]),
     specialization: new FormControl('', [])
@@ -80,5 +80,9 @@ export class UserFormComponent implements OnInit, OnChanges {
     if (this.error[field]) {
       return this.error[field]['i18nErrorKey'];
     }
+  }
+
+  public isValidClass(control: AbstractControl) {
+    return control.errors && control.touched ? 'input-group-invalid' : '';
   }
 }

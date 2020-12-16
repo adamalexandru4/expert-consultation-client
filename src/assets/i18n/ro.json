@@ -4,7 +4,13 @@
   "pattern": "Număr de telefon invalid",
   "phoneNumber": "Număr de telefon incorect.",
   "validation.Resource.not.found": "Resursa nu a fost găsită.",
-  "validation.numberFormatInvalid": "Numărul este invalid.",
+  "validation": {
+    "form": {
+      "numberFormatInvalid": "Numărul este invalid",
+      "emailFormatInvalid": "Adresa de mail invalidă",
+      "phoneNumberInvalid": "Număr de telefon invalid"
+    }
+  },
   "register": {
     "form": {
       "fullName": "Nume complet",

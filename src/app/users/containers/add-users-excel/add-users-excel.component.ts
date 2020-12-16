@@ -26,4 +26,8 @@ export class AddUsersExcelComponent {
   public onCancel() {
     this.router.navigate(['/users']);
   }
+
+  public isContentFilled() {
+    return this.excelContent && this.excelContent.length > 0 ? true : false;
+  }
 }
