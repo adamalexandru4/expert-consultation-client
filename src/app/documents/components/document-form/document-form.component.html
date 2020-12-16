@@ -3,10 +3,10 @@
     <label class="col-md-2 col-form-label form-control-label" for="documentTitle">
       {{ 'document.add.title' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClassRequired(documentForm.controls.documentTitle)">
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClass(documentForm.controls.documentTitle)">
       <input class="form-control" formControlName="documentTitle" id="documentTitle" name="documentTitle" type="text" />
     </div>
-    <div *ngIf="isValidClassRequired(documentForm.controls.documentTitle)" class="col-md-10 offset-md-2">
+    <div *ngIf="documentForm.controls.documentTitle.hasError('required') && documentForm.controls.documentTitle.touched" class="col-md-10 offset-md-2">
       <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>
@@ -14,25 +14,24 @@
     <label class="col-md-2 col-form-label form-control-label" for="documentNumber">
       {{ 'document.add.number' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative"
-      [ngClass]="[isValidClassRequired(documentForm.controls.documentNumber), isValidClassNumber(documentForm.controls.documentNumber)]">
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClass(documentForm.controls.documentNumber)">
           <input class="form-control" formControlName="documentNumber" id="documentNumber" name="documentNumber" type="number" min="1" />
     </div>
-    <div *ngIf="isValidClassRequired(documentForm.controls.documentNumber)" class="col-md-10 offset-md-2">
+    <div *ngIf="documentForm.controls.documentNumber.hasError('required') && documentForm.controls.documentNumber.touched" class="col-md-10 offset-md-2">
       <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
-    <div *ngIf="isValidClassNumber(documentForm.controls.documentNumber)" class="col-md-10 offset-md-2">
-      <p class="mb-0 mt-1 text-danger">{{ 'validation.format.numberFormatInvalid' | translate }}</p>
+    <div *ngIf="documentForm.controls.documentNumber.hasError('min') && documentForm.controls.documentNumber.touched" class="col-md-10 offset-md-2">
+      <p class="mb-0 mt-1 text-danger">{{ 'validation.form.numberFormatInvalid' | translate }}</p>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-2 col-form-label form-control-label" for="documentInitializer">
       {{ 'document.add.initiator' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClassRequired(documentForm.controls.documentInitializer)">
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClass(documentForm.controls.documentInitializer)">
       <input class="form-control" formControlName="documentInitializer" id="documentInitializer" name="documentInitializer" />
     </div>
-    <div *ngIf="isValidClassRequired(documentForm.controls.documentInitializer)" class="col-md-10 offset-md-2">
+    <div *ngIf="documentForm.controls.documentInitializer.hasError('required') && documentForm.controls.documentInitializer.touched" class="col-md-10 offset-md-2">
       <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>
@@ -40,14 +39,14 @@
     <label class="col-md-2 col-form-label form-control-label" for="documentType">
       {{ 'document.add.type.name' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClassRequired(documentForm.controls.documentType)">
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClass(documentForm.controls.documentType)">
       <select class="form-control" formControlName="documentType" id="documentType" name="documentType">
         <option *ngFor="let type of documentTypeKeys()" [value]="type">
           {{ 'document.add.type.' + type | translate }}
         </option>
       </select>
     </div>
-    <div *ngIf="isValidClassRequired(documentForm.controls.documentType)" class="col-md-10 offset-md-2">
+    <div *ngIf="documentForm.controls.documentType.hasError('required') && documentForm.controls.documentType.touched" class="col-md-10 offset-md-2">
       <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>
@@ -55,7 +54,7 @@
     <label class="col-md-2 col-form-label form-control-label" for="dateOfDevelopment">
       {{ 'document.add.release' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClassRequired(documentForm.controls.dateOfDevelopment)">
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClass(documentForm.controls.dateOfDevelopment)">
       <input [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-default' }"
              bsDatepicker
              class="form-control"
@@ -69,7 +68,7 @@
           </span>
       </div>
     </div>
-    <div *ngIf="isValidClassRequired(documentForm.controls.dateOfDevelopment)" class="col-md-10 offset-md-2">
+    <div *ngIf="documentForm.controls.dateOfDevelopment.hasError('required') && documentForm.controls.dateOfDevelopment.touched" class="col-md-10 offset-md-2">
       <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>
@@ -77,7 +76,7 @@
     <label class="col-md-2 col-form-label form-control-label" for="dateOfReceipt">
       {{ 'document.add.receiving' | translate }}
     </label>
-    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClassRequired(documentForm.controls.dateOfReceipt)">
+    <div class="col-md-10 input-group input-group-alternative" [ngClass]="isValidClass(documentForm.controls.dateOfReceipt)">
       <input [bsConfig]="{ isAnimated: true, adaptivePosition: true, containerClass: 'theme-default' }"
              bsDatepicker
              class="form-control"
@@ -91,7 +90,7 @@
           </span>
       </div>
     </div>
-    <div *ngIf="isValidClassRequired(documentForm.controls.dateOfReceipt)" class="col-md-10 offset-md-2">
+    <div *ngIf="documentForm.controls.dateOfReceipt.hasError('required') && documentForm.controls.dateOfReceipt.touched" class="col-md-10 offset-md-2">
       <p class="mb-0 mt-1 text-danger">{{ 'required' | translate }}</p>
     </div>
   </div>

@@ -52,19 +52,8 @@ export class DocumentFormComponent implements OnInit, OnChanges {
     return keys.slice(keys.length / 2);
   }
 
-  public hasError(control: AbstractControl) {
-    return (control.invalid && (control.dirty || control.touched));
+  public isValidClass(control: AbstractControl) {
+    return control.errors && control.touched ? 'input-group-invalid' : '';
   }
 
-  public isValidClassRequired(control: AbstractControl) {
-    return this.hasError(control) && control.errors.required ? 'input-group-invalid' : '';
-  }
-
-  public isValidClassNumber(control: AbstractControl) {
-    return this.hasError(control) && control.errors.min ? 'input-group-invalid' : '';
-  }
-
-  public isFilePathValid(control: AbstractControl) {
-    console.log(control);
-  }
 }
